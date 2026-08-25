@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+export GRID_ASSISTANT_ROOT=/opt/grid-assistant
+export HERMES_HOME="${HERMES_HOME:-/opt/grid-assistant/data/hermes}"
+case "$HERMES_HOME" in
+  /opt/grid-assistant/data/hermes|/opt/grid-assistant/data/hermes-*) ;;
+  *) echo "invalid HERMES_HOME" >&2; exit 2 ;;
+esac
+export HERMES_BIN=/opt/grid-assistant/bin/hermes
+if [[ -r "$HERMES_HOME/.env" ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$HERMES_HOME/.env"
+  set +a
+fi
+exec /opt/grid-assistant/runtime/app-venv/bin/grid-assistant "$@"

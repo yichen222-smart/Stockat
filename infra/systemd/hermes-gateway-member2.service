@@ -1,0 +1,30 @@
+[Unit]
+Description=Hermes Agent Gateway - second Weixin user
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=gridassistant
+Group=gridassistant
+ExecStart=/opt/grid-assistant/runtime/hermes-venv/bin/python -m hermes_cli.main gateway run
+WorkingDirectory=/opt/grid-assistant/data/hermes-member2
+Environment=HOME=/opt/grid-assistant
+Environment=USER=gridassistant
+Environment=LOGNAME=gridassistant
+Environment=PATH=/opt/grid-assistant/vendor/hermes-agent/venv/bin:/opt/grid-assistant/runtime/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=VIRTUAL_ENV=/opt/grid-assistant/runtime/hermes-venv
+Environment=HERMES_HOME=/opt/grid-assistant/data/hermes-member2
+Restart=always
+RestartSec=5
+RestartForceExitStatus=75
+RestartPreventExitStatus=78
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=60
+MemoryMax=512M
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target

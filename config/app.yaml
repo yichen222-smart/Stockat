@@ -1,0 +1,13 @@
+timezone: Asia/Shanghai
+invite_ttl_minutes: 15
+log_level: INFO
+rsshub_url: http://127.0.0.1:1200
+schedule:
+  start_hour: 8
+  start_minute: 5
+  report_hour: 8
+  report_minute: 30
+  late_send_cutoff_hour: 9
+  late_send_cutoff_minute: 15
+messaging:
+  concurrency: 1

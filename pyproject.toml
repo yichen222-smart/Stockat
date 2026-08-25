@@ -1,0 +1,40 @@
+[project]
+name = "stockat"
+version = "0.1.0"
+description = "A privacy-aware, multi-user A-share morning briefing assistant for WeChat."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "yichen222-smart" }]
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "PyYAML==6.0.3",
+  "requests==2.33.0",
+  "feedparser==6.0.12",
+  "pandas==2.3.3",
+  "numpy==2.4.6",
+  "akshare==1.18.81",
+  "TA-Lib==0.6.8",
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1"]
+
+[project.scripts]
+stockat = "app.main:main"
+grid-assistant = "app.main:main"
+
+[project.urls]
+Homepage = "https://github.com/yichen222-smart/Stockat"
+Repository = "https://github.com/yichen222-smart/Stockat"
+Issues = "https://github.com/yichen222-smart/Stockat/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,36 @@
+sectors:
+  default:
+    keywords: []
+    exclude_keywords: []
+    preferred_sources:
+      - rsshub_cls
+      - rsshub_wallstreetcn
+      - web_search
+
+  银行:
+    keywords: [银行, 商业银行, 存款利率, 贷款利率, 净息差, 不良率, 金融监管]
+    exclude_keywords: []
+
+  半导体:
+    keywords: [半导体, 芯片, 集成电路, 晶圆, 光刻, 封装测试, 芯片设备]
+    exclude_keywords: []
+
+  存储:
+    keywords: [存储芯片, DRAM, NAND, HBM, 内存, 闪存, 长鑫, 长江存储]
+    exclude_keywords: []
+
+  光伏:
+    keywords: [光伏, 太阳能, 硅料, 硅片, 电池片, 组件, 逆变器]
+    exclude_keywords: []
+
+  机器人:
+    keywords: [机器人, 人形机器人, 工业机器人, 减速器, 伺服系统, 机器视觉]
+    exclude_keywords: []
+
+  电力设备:
+    keywords: [电力设备, 电网, 特高压, 输变电, 变压器, 电气设备, 新型电力系统]
+    exclude_keywords: []
+
+  白酒:
+    keywords: [白酒, 酒业, 茅台, 五粮液, 泸州老窖, 洋河, 酒企]
+    exclude_keywords: []

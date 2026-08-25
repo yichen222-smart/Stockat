@@ -1,0 +1,44 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Application state
+data/
+logs/
+backups/
+runtime/
+vendor/
+*.db
+*.db-*
+*.sqlite*
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Temporary and generated files
+tmp/
+*.log
+*.tar.gz
+*.zip

@@ -1,0 +1,27 @@
+[Unit]
+Description=Multi-user grid and news assistant daily run
+After=network-online.target hermes-gateway.service hermes-gateway-member2.service rsshub.service
+Wants=network-online.target hermes-gateway.service hermes-gateway-member2.service rsshub.service
+
+[Service]
+Type=oneshot
+User=gridassistant
+Group=gridassistant
+WorkingDirectory=/opt/grid-assistant
+Environment=GRID_ASSISTANT_ROOT=/opt/grid-assistant
+Environment=HERMES_HOME=/opt/grid-assistant/data/hermes
+Environment=HERMES_BIN=/opt/grid-assistant/bin/hermes
+EnvironmentFile=/opt/grid-assistant/data/hermes/.env
+ExecStart=/opt/grid-assistant/bin/grid-assistant daily --scheduled
+TimeoutStartSec=2700
+Nice=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/grid-assistant/data /opt/grid-assistant/logs
+MemoryMax=768M
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target

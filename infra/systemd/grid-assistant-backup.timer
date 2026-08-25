@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily grid assistant backup
+
+[Timer]
+OnCalendar=*-*-* 03:30:00
+Persistent=true
+RandomizedDelaySec=5min
+Unit=grid-assistant-backup.service
+
+[Install]
+WantedBy=timers.target

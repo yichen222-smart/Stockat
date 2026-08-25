@@ -1,0 +1,9 @@
+[Unit]
+Description=Grid assistant health check
+After=hermes-gateway.service rsshub.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/grid-assistant/scripts/healthcheck.sh
+NoNewPrivileges=true
+PrivateTmp=true

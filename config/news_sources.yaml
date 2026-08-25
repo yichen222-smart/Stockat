@@ -1,0 +1,71 @@
+sources:
+  - id: rsshub_csrc
+    name: 中国证监会
+    type: rsshub
+    url: http://127.0.0.1:1200/gov/csrc/news
+    category: regulation
+    official: true
+    weight: 1.0
+    enabled: true
+
+  - id: rsshub_nfra
+    name: 国家金融监督管理总局
+    type: rsshub
+    url: http://127.0.0.1:1200/gov/nfra/915
+    category: regulation
+    official: true
+    weight: 1.0
+    enabled: true
+
+  - id: rsshub_sse_rules
+    name: 上海证券交易所
+    type: rsshub
+    url: http://127.0.0.1:1200/sse/sselawsrules/latest
+    category: regulation
+    official: true
+    weight: 1.0
+    enabled: true
+
+  - id: rsshub_szse_rules
+    name: 深圳证券交易所
+    type: rsshub
+    url: http://127.0.0.1:1200/szse/rule/allrules/bussiness
+    category: regulation
+    official: true
+    weight: 1.0
+    enabled: true
+  - id: rsshub_cls
+    name: 财联社电报
+    type: rsshub
+    url: http://127.0.0.1:1200/cls/telegraph
+    category: market
+    official: false
+    weight: 0.85
+    enabled: true
+
+  - id: rsshub_wallstreetcn
+    name: 华尔街见闻资讯
+    type: rsshub
+    url: http://127.0.0.1:1200/wallstreetcn/news
+    category: market
+    official: false
+    weight: 0.75
+    enabled: true
+
+  - id: rsshub_jin10
+    name: 金十数据快讯
+    type: rsshub
+    url: http://127.0.0.1:1200/jin10
+    category: macro
+    official: false
+    weight: 0.70
+    enabled: true
+
+  - id: rsshub_eastmoney_strategy
+    name: 东方财富策略研报
+    type: rsshub
+    url: http://127.0.0.1:1200/eastmoney/report/strategyreport
+    category: research
+    official: false
+    weight: 0.70
+    enabled: true

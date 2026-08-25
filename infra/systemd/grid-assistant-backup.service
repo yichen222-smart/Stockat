@@ -1,0 +1,10 @@
+[Unit]
+Description=Back up grid assistant database and configuration
+
+[Service]
+Type=oneshot
+ExecStart=/opt/grid-assistant/scripts/backup.sh
+Nice=10
+IOSchedulingClass=idle
+NoNewPrivileges=true
+PrivateTmp=true

@@ -1,0 +1,7 @@
+buy_grid_pct: [0.012, 0.016, 0.020, 0.025, 0.030]
+sell_grid_pct: [0.012, 0.016, 0.020, 0.025, 0.030]
+minimum_history_days: 120
+minimum_active_trading_days: 5
+improvement_threshold: 0.05
+maximum_consecutive_fills: 5
+normal_outside_days: 2

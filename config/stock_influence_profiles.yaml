@@ -1,0 +1,171 @@
+metadata:
+  version: 1
+  generated_at: "2026-08-14"
+  scope: "用于演示四维新闻关联逻辑的示例股票画像，不代表真实用户关注或投资建议"
+  source_basis: "上市公司2025年年报、交易所披露及公司官网；竞对仅保留核心可比主体"
+  refresh_policy:
+    status: "planned_next_version"
+    note: "示例画像生成于2026-08-14；生产部署应建立定期校验与刷新机制。"
+
+stocks:
+  "601179":
+    name: 中国西电
+    direct:
+      entities: [中国西电, 西电电气]
+      products: [变压器, 高压开关, 电容器, 避雷器, 二次设备]
+      event_terms: [公告, 业绩, 中标, 订单, 签约, 投产, 产能, 管理层, 重组, 收购, 处罚, 事故, 技术突破]
+    competitor:
+      entities: [特变电工, 平高电气, 许继电气, 思源电气]
+      event_terms: [价格, 产能, 中标, 订单, 技术突破, 事故, 处罚, 重组]
+    industry:
+      entities: [输变电设备, 特高压, 高压开关, 电力变压器, 电网设备]
+      event_terms: [政策, 核准, 招标, 电网投资, 供需, 行业价格, 产能, 技术突破]
+    supply_chain:
+      upstream: [取向硅钢, 铜价, 电解铜, 铝价, 电解铝, 绝缘材料]
+      downstream: [国家电网, 南方电网, 特高压工程, 电网投资]
+      upstream_event_terms: [涨价, 降价, 短缺, 停产, 扩产, 库存, 关税, 事故]
+      downstream_event_terms: [招标, 中标, 投资, 核准, 开工, 订单, 处罚]
+
+  "300308":
+    name: 中际旭创
+    direct:
+      entities: [中际旭创, 苏州旭创, Innolight]
+      products: [高速光模块, 800G光模块, 1.6T光模块, 硅光模块]
+      event_terms: [公告, 业绩, 订单, 签约, 产品发布, 量产, 投产, 产能, 管理层, 收购, 处罚, 事故, 技术突破]
+    competitor:
+      entities: [新易盛, 光迅科技, 华工科技, Coherent]
+      event_terms: [价格, 产能, 订单, 量产, 技术突破, 事故, 处罚, 收购]
+    industry:
+      entities: [高速光模块, 光通信模块, 光互连, 800G, 1.6T, 硅光]
+      event_terms: [政策, 供需, 价格, 产能, 量产, 标准, 技术突破, 出口管制]
+    supply_chain:
+      upstream: [光芯片, DSP芯片, 激光器, 硅光芯片, 光器件]
+      downstream: [云服务商, AI数据中心, 数据中心交换机, CSP资本开支, 北美云厂商]
+      upstream_event_terms: [涨价, 降价, 短缺, 扩产, 禁运, 事故, 技术突破]
+      downstream_event_terms: [资本开支, 订单, 扩建, 延期, 削减, 技术升级]
+
+  "688981":
+    name: 中芯国际
+    direct:
+      entities: [中芯国际, SMIC, 中芯北方]
+      products: [晶圆代工, 先进制程, 成熟制程, 特色工艺]
+      event_terms: [公告, 业绩, 订单, 签约, 量产, 投产, 产能, 管理层, 收购, 处罚, 事故, 技术突破]
+    competitor:
+      entities: [台积电, 联华电子, 联电, 格芯, 华虹公司]
+      event_terms: [代工报价, 价格, 产能, 订单, 量产, 技术突破, 事故, 处罚, 收购]
+    industry:
+      entities: [晶圆代工, 集成电路制造, 先进制程, 成熟制程, 产能利用率]
+      event_terms: [政策, 补贴, 供需, 价格, 扩产, 量产, 技术突破, 出口管制]
+    supply_chain:
+      upstream: [半导体设备, 光刻机, 硅片, 光刻胶, 电子特气]
+      downstream: [芯片设计, 消费电子, 汽车电子, 工业控制, AI芯片]
+      upstream_event_terms: [涨价, 降价, 短缺, 扩产, 禁运, 事故, 技术突破]
+      downstream_event_terms: [需求增长, 需求下降, 订单, 库存, 资本开支, 出口管制]
+
+  "600986":
+    name: 浙文互联
+    direct:
+      entities: [浙文互联, 浙文智算, 浙文蓝耘]
+      products: [数智营销, 算力服务, 数字文化]
+      event_terms: [公告, 业绩, 订单, 签约, 中标, 产品发布, 投产, 管理层, 重组, 收购, 处罚, 事故]
+    competitor:
+      entities: [蓝色光标, 省广集团, 利欧股份, 华扬联众]
+      event_terms: [价格, 订单, 客户, 产品发布, 技术突破, 事故, 处罚, 重组]
+    industry:
+      entities: [数字营销, AI营销, 算力服务, 智算中心, 数字文化]
+      event_terms: [行业政策, 广告预算, 流量价格, 算力供需, 算力价格, 算力投资, 算力订单, 技术突破]
+    supply_chain:
+      upstream: [巨量引擎, 腾讯广告, 阿里妈妈, GPU服务器, 媒体平台]
+      downstream: [广告主, 汽车品牌, 快消品牌, 政企算力客户]
+      upstream_event_terms: [涨价, 降价, 平台政策, 流量政策, 短缺, 扩产, 处罚]
+      downstream_event_terms: [广告预算, 预算削减, 资本开支, 算力订单, 需求增长, 需求下降]
+
+  "603618":
+    name: 杭电股份
+    direct:
+      entities: [杭电股份, 杭州电缆, 富春江光电]
+      products: [电力电缆, 导线, 光纤光缆, 通信电缆]
+      event_terms: [公告, 业绩, 中标, 订单, 签约, 投产, 产能, 管理层, 收购, 处罚, 事故, 技术突破]
+    competitor:
+      entities: [亨通光电, 中天科技, 宝胜股份, 起帆电缆]
+      event_terms: [价格, 产能, 中标, 订单, 技术突破, 事故, 处罚, 重组]
+    industry:
+      entities: [电线电缆, 电力电缆, 光纤光缆, 通信电缆, 导线]
+      event_terms: [政策, 招标, 供需, 价格, 产能, 标准, 技术突破]
+    supply_chain:
+      upstream: [铜价, 电解铜, 铝价, 电解铝, 聚乙烯, 绝缘料, 光纤预制棒]
+      downstream: [国家电网, 南方电网, 电信运营商, 光伏, 风电, 储能, 数据中心]
+      upstream_event_terms: [涨价, 降价, 短缺, 停产, 扩产, 库存, 关税, 事故]
+      downstream_event_terms: [招标, 中标, 投资, 扩建, 开工, 订单, 处罚]
+
+  "600126":
+    name: 杭钢股份
+    direct:
+      entities: [杭钢股份, 宁波钢铁]
+      products: [热轧钢材, 钢铁制造, IDC, 智算服务]
+      event_terms: [公告, 业绩, 订单, 签约, 投产, 产能, 管理层, 重组, 收购, 处罚, 事故, 技术突破]
+    competitor:
+      entities: [宝钢股份, 华菱钢铁, 南钢股份, 鞍钢股份]
+      event_terms: [钢价, 价格, 产能, 订单, 技术突破, 事故, 处罚, 重组]
+    industry:
+      entities: [热轧钢材, 钢铁冶炼, 钢铁行业, IDC, 数据中心, 智算中心]
+      event_terms: [行业政策, 限产, 钢铁供需, 钢价, 产能, 钢材出口, IDC投资, 算力投资, 技术突破]
+    supply_chain:
+      upstream: [铁矿石, 焦煤, 焦炭, 废钢, 电力]
+      downstream: [汽车, 家电, 机械制造, 建筑, 数据中心客户]
+      upstream_event_terms: [涨价, 降价, 短缺, 停产, 扩产, 库存, 关税, 事故]
+      downstream_event_terms: [需求增长, 需求下降, 订单, 出口, 限产, 资本开支]
+
+  "600770":
+    name: 综艺股份
+    direct:
+      entities: [综艺股份, 江苏新聚, 吉莱微]
+      products: [功率半导体, 芯片设计, 智能卡芯片, 太阳能电站]
+      event_terms: [公告, 业绩, 订单, 签约, 量产, 投产, 产能, 管理层, 重组, 收购, 处罚, 事故, 技术突破]
+    competitor:
+      entities: [士兰微, 扬杰科技, 华润微, 捷捷微电]
+      event_terms: [价格, 产能, 订单, 量产, 技术突破, 事故, 处罚, 收购]
+    industry:
+      entities: [功率半导体, MOSFET, IGBT, 芯片设计, 光伏电站]
+      event_terms: [政策, 补贴, 供需, 价格, 产能, 量产, 技术突破, 出口管制]
+    supply_chain:
+      upstream: [硅片, 晶圆制造设备, 封装材料, 光伏组件]
+      downstream: [消费电子, 工业控制, 新能源汽车, 电网, 电力市场]
+      upstream_event_terms: [涨价, 降价, 短缺, 扩产, 事故, 技术突破]
+      downstream_event_terms: [需求增长, 需求下降, 订单, 补贴, 电价, 资本开支]
+
+  "600732":
+    name: 爱旭股份
+    direct:
+      entities: [爱旭股份, 上海爱旭, 珠海富山爱旭]
+      products: [N型ABC电池, ABC组件, 太阳能电池片, 光伏组件]
+      event_terms: [公告, 业绩, 订单, 签约, 中标, 量产, 投产, 产能, 管理层, 重组, 收购, 处罚, 事故, 技术突破]
+    competitor:
+      entities: [隆基绿能, 晶科能源, 天合光能, 晶澳科技]
+      event_terms: [组件价格, 电池片价格, 产能, 订单, 量产, 技术突破, 事故, 处罚, 重组]
+    industry:
+      entities: [光伏电池片, 光伏组件, N型电池, ABC电池, 光伏行业]
+      event_terms: [行业政策, 反内卷, 供需, 组件价格, 电池片价格, 产能, 出口关税, 技术突破]
+    supply_chain:
+      upstream: [硅料价格, 硅片价格, 银价, 光伏玻璃, 光伏胶膜]
+      downstream: [光伏电站, 分布式光伏, 海外光伏市场, 组件招标]
+      upstream_event_terms: [上涨, 下跌, 涨价, 降价, 短缺, 扩产, 库存, 关税]
+      downstream_event_terms: [招标, 中标, 装机增长, 装机下降, 补贴, 关税, 需求增长, 需求下降]
+
+  "601899":
+    name: 紫金矿业
+    direct:
+      entities: [紫金矿业, 紫金山金铜矿, 巨龙铜矿, 卡莫阿-卡库拉]
+      products: [矿产金, 矿产铜, 矿产锌, 矿产银, 碳酸锂]
+      event_terms: [公告, 业绩, 订单, 签约, 投产, 产量, 产能, 管理层, 重组, 收购, 处罚, 事故, 技术突破]
+    competitor:
+      entities: [洛阳钼业, 江西铜业, 山东黄金, 中国黄金国际]
+      event_terms: [金价, 铜价, 产量, 产能, 收购, 技术突破, 事故, 处罚, 罢工]
+    industry:
+      entities: [黄金市场, 铜矿, 金矿, 锂矿, 有色金属矿业, 金价, 铜价]
+      event_terms: [上涨, 下跌, 创新高, 供给中断, 矿业政策, 资源税, 出口限制, 罢工, 并购]
+    supply_chain:
+      upstream: [矿山设备, 柴油价格, 电力价格, 炸药, 选矿药剂]
+      downstream: [黄金交易所, 铜冶炼, 电线电缆, 新能源汽车, 锂电池]
+      upstream_event_terms: [涨价, 降价, 短缺, 停产, 扩产, 关税, 事故]
+      downstream_event_terms: [需求增长, 需求下降, 库存, 订单, 产能, 出口, 关税]

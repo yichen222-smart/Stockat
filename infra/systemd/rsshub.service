@@ -1,0 +1,30 @@
+[Unit]
+Description=RSSHub local news source
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=gridassistant
+Group=gridassistant
+WorkingDirectory=/opt/grid-assistant/vendor/rsshub
+Environment=NODE_ENV=production
+Environment=PORT=1200
+Environment=LISTEN_INADDR_ANY=0
+Environment=CACHE_TYPE=memory
+Environment=PATH=/opt/grid-assistant/runtime/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+ExecStart=/opt/grid-assistant/runtime/node/bin/node /opt/grid-assistant/vendor/rsshub/dist/index.mjs
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=90
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/grid-assistant/data/rsshub /opt/grid-assistant/logs
+MemoryMax=384M
+CPUQuota=75%
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target

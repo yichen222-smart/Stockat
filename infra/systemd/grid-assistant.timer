@@ -1,0 +1,13 @@
+[Unit]
+Description=Start and retry the grid assistant morning pipeline
+
+[Timer]
+OnCalendar=*-*-* 08:05:00
+OnCalendar=*-*-* 08:40:00
+OnCalendar=*-*-* 09:00:00
+Persistent=true
+AccuracySec=1min
+Unit=grid-assistant.service
+
+[Install]
+WantedBy=timers.target

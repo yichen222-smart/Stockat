@@ -1,0 +1,5 @@
+buy_commission: 0.0003
+sell_commission: 0.0003
+minimum_commission: 0.0
+stamp_tax: 0.0005
+slippage: 0.0005

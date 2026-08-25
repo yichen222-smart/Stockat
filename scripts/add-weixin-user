@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+set -euo pipefail
+project_root=/opt/grid-assistant
+data_root="$project_root/data"
+base_home="$data_root/hermes"
+lock_file=/run/lock/grid-assistant-add-user.lock
+
+require_root() {
+  if [[ ${EUID:-99999} -ne 0 ]]; then
+    echo "请通过 sudo 运行新增用户向导。" >&2
+    exit 2
+  fi
+}
+
+validate_member() {
+  local candidate=${1:-}
+  if [[ ! "$candidate" =~ ^member([3-9]|[1-9][0-9]+)$ ]]; then
+    echo "用户键格式错误，应类似 member3。" >&2
+    exit 2
+  fi
+}
+
+prepare_member() {
+  require_root
+  exec 9>"$lock_file"
+  flock -x 9
+  local number=3 member_key member_home
+  while [[ -e "$data_root/hermes-member$number" ]]; do
+    number=$((number + 1))
+  done
+  member_key="member$number"
+  member_home="$data_root/hermes-$member_key"
+  install -d -m 0700 -o gridassistant -g gridassistant "$member_home"
+  install -m 0600 -o gridassistant -g gridassistant "$base_home/config.yaml" "$member_home/config.yaml"
+  awk -F= '$1 ~ /^(DEEPSEEK_API_KEY|DEEPSEEK_BASE_URL|HERMES_MODEL)$/ {print}' \
+    "$base_home/.env" > "$member_home/.env"
+  chown gridassistant:gridassistant "$member_home/.env"
+  chmod 0600 "$member_home/.env"
+  install -m 0640 -o gridassistant -g gridassistant \
+    "$project_root/AGENTS.md" "$member_home/AGENTS.md"
+  install -d -m 0700 -o gridassistant -g gridassistant "$member_home/skills"
+  cp -a "$project_root/skills/grid-news-assistant" "$member_home/skills/"
+  chown -R gridassistant:gridassistant "$member_home/skills"
+  chmod -R go-rwx "$member_home/skills"
+  printf 'member_key=%s\ngateway_home=%s\nnext=sudo %s/bin/add-weixin-user login %s\n' \
+    "$member_key" "$member_home" "$project_root" "$member_key"
+}
+
+login_member() {
+  require_root
+  local member_key=${1:-}
+  validate_member "$member_key"
+  local member_home="$data_root/hermes-$member_key"
+  if [[ ! -d "$member_home" ]]; then
+    echo "尚未准备 $member_key，请先运行 prepare。" >&2
+    exit 2
+  fi
+  if grep -q '^WEIXIN_TOKEN=' "$member_home/.env"; then
+    echo "$member_key 已经完成微信配对，拒绝覆盖现有凭据。" >&2
+    exit 2
+  fi
+  runuser -u gridassistant -- env \
+    HOME=/opt/grid-assistant \
+    USER=gridassistant \
+    LOGNAME=gridassistant \
+    HERMES_HOME="$member_home" \
+    PATH=/opt/grid-assistant/vendor/hermes-agent/venv/bin:/opt/grid-assistant/runtime/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    VIRTUAL_ENV=/opt/grid-assistant/runtime/hermes-venv \
+    /opt/grid-assistant/runtime/hermes-venv/bin/python \
+    "$project_root/scripts/pair-weixin-user.py" --home "$member_home"
+  systemctl daemon-reload
+  systemctl enable --now "hermes-gateway@$member_key.service"
+  systemctl --no-pager --quiet is-active "hermes-gateway@$member_key.service"
+  echo "gateway=active member_key=$member_key"
+  echo "下一步：新用户向机器人发消息取得配对码，再由 Codex 批准。"
+}
+
+approve_member() {
+  require_root
+  local member_key=${1:-} code=${2:-}
+  validate_member "$member_key"
+  if [[ ! "$code" =~ ^[A-Z0-9]{8}$ ]]; then
+    echo "配对码格式错误，应为 8 位大写字母或数字。" >&2
+    exit 2
+  fi
+  local member_home="$data_root/hermes-$member_key"
+  runuser -u gridassistant -- env \
+    HOME=/opt/grid-assistant HERMES_HOME="$member_home" \
+    /opt/grid-assistant/bin/hermes pairing approve "$code"
+}
+
+list_members() {
+  require_root
+  local path member_key unit state
+  for path in "$data_root"/hermes-member*; do
+    [[ -d "$path" ]] || continue
+    member_key=${path##*/hermes-}
+    unit="hermes-gateway@$member_key.service"
+    state=$(systemctl is-active "$unit" 2>/dev/null || true)
+    printf '%s %s\n' "$member_key" "${state:-inactive}"
+  done
+}
+
+case ${1:-} in
+  prepare) prepare_member ;;
+  login) login_member "${2:-}" ;;
+  approve) approve_member "${2:-}" "${3:-}" ;;
+  list) list_members ;;
+  *)
+    echo "用法：add-weixin-user {prepare|login memberN|approve memberN CODE|list}" >&2
+    exit 2
+    ;;
+esac

@@ -1,0 +1,1 @@
+"""Hermes Weixin delivery adapter."""
