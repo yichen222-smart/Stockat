@@ -12,7 +12,7 @@ dependencies = [
   "feedparser==6.0.12",
   "pandas==2.3.3",
   "numpy==2.4.6",
-  "akshare==1.18.81",
+  "akshare==1.18.94",
   "TA-Lib==0.6.8",
 ]
 
