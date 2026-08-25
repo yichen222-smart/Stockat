@@ -8,12 +8,12 @@ authors = [{ name = "yichen222-smart" }]
 requires-python = ">=3.11,<3.14"
 dependencies = [
   "PyYAML==6.0.3",
-  "requests==2.33.0",
-  "feedparser==6.0.12",
+  "requests==2.34.2",
+  "feedparser==6.0.14",
   "pandas==2.3.3",
   "numpy==2.4.6",
-  "akshare==1.18.81",
-  "TA-Lib==0.6.8",
+  "akshare==1.18.94",
+  "TA-Lib==0.7.1",
 ]
 
 [project.optional-dependencies]
